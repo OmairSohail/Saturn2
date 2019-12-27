@@ -100,7 +100,12 @@ export default {
                   .createUserWithEmailAndPassword(this.email,this.password)
                   .then(()=>{
                      Swal.fire('Account Successfully Created').then(()=>{
-                         this.$router.push('/')
+                         firebase
+                        .auth()
+                        .signInWithEmailAndPassword(this.email,this.password).then(()=>{
+                           this.$router.push('/signup')
+                        })
+                         
                      })
 
                   }).catch((err)=>{

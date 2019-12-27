@@ -41,6 +41,7 @@
 import navbar from '../components/NavBar'
 import firebase from '../config/firebaseinit'
 import Swal from 'sweetalert2'
+import 'es6'
 export default {
     data(){
         return{
@@ -64,7 +65,7 @@ export default {
                     'You Successfully Logged In',
                     'success'
                     ).then(()=>{
-                        this.$router.push('/')
+                        this.$router.push('/success/')
                     })
                 })
                 .catch((err)=>{

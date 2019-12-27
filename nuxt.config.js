@@ -16,6 +16,14 @@ module.exports = {
       { href:"https://fonts.googleapis.com/css?family=Ubuntu&display=swap", rel:"stylesheet" },
       { rel:"stylesheet", href:"https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css"},
       { rel:"stylesheet", href:"https://use.fontawesome.com/releases/v5.2.0/css/all.css"}
+    ],
+    scripts:[
+      {
+        src:"https://code.jquery.com/jquery-3.3.1.min.js",
+        integrity:"sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=",
+        crossorigin:"anonymous"
+      },
+      { src:"https://api.trello.com/1/client.js?key=d74154350094efbca33755a7acadac76"},
     ]
   },
   /*
@@ -43,7 +51,11 @@ module.exports = {
   modules: [
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
+    '@nuxtjs/axios'
   ],
+  axios: {
+    // proxyHeaders: false
+  },
   /*
   ** Build configuration
   */
