@@ -1,15 +1,16 @@
 <template>
 <div>
-<navbar/> 
+
      
 </div>
 </template>
 
 <script>
-import navbar from '../components/NavBar'
+
 export default {
+  auth:false,
   components: {
-    navbar
+
   }
 }
 </script>

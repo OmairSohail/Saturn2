@@ -1,6 +1,6 @@
 <template>
 <div>
-<navbar/>
+
 <section class="hero is-fullheight-with-navbar">
   <div class="hero-body">
     <div class="columns">
@@ -64,10 +64,11 @@
 </template>
 
 <script>
-import navbar from '../components/NavBar'
+
 import Swal from 'sweetalert2'
 import firebase from '../config/firebaseinit'
 export default {
+    auth:'guest',
     data(){
         return{
            name:'',
@@ -80,7 +81,7 @@ export default {
         }
     },
     components:{
-        navbar
+      
     },
     methods:{
         Signup(){

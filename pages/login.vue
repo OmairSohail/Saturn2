@@ -1,6 +1,6 @@
 <template>
 <div>
-<navbar/>
+
 <section class="hero is-black is-fullheight-with-navbar">
   <div class="hero-body">
    
@@ -38,19 +38,20 @@
 </template>
 
 <script>
-import navbar from '../components/NavBar'
+
 import firebase from '../config/firebaseinit'
 import Swal from 'sweetalert2'
-import 'es6'
 export default {
+    auth:false,
     data(){
         return{
             email:'',
-            password:''
+            password:'',
+            loggedin:false
         }
     },
     components:{
-        navbar
+       
     },
     methods:{
         login(){
@@ -65,7 +66,18 @@ export default {
                     'You Successfully Logged In',
                     'success'
                     ).then(()=>{
-                        this.$router.push('/success/')
+                        //console.log(firebase.auth().currentUser)
+                        
+                        this.$auth.loginWith('local',{
+                                data: {
+                                        username: this.email,
+                                        password: this.password
+                                    }
+                        })
+
+                        this.$router.push({  
+                            path:`/`
+                            })
                     })
                 })
                 .catch((err)=>{

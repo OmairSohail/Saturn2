@@ -1,7 +1,7 @@
 <template>
     <b-navbar>
         <template slot="brand">
-            <b-navbar-item tag="router-link" :to="{ path: '/' }">
+            <b-navbar-item tag="nuxt-link" :to="{ path: '/' }">
                 <img
                     src="@/assets/Saturn.png"
                     alt="Saturn Application"
@@ -9,40 +9,64 @@
             </b-navbar-item>
         </template>
         <template slot="start">
-            <b-navbar-item href="#">
-                Home
+            <b-navbar-item>
+               <nuxt-link to="/"> Home </nuxt-link>
             </b-navbar-item>
-            <b-navbar-item href="#">
-                Documentation
+            <b-navbar-item>
+                <nuxt-link to="/docs">Documentation</nuxt-link>
             </b-navbar-item>
-            <b-navbar-dropdown label="Info">
-                <b-navbar-item href="#">
-                    About
+            <b-navbar-dropdown label="More">
+                <b-navbar-item >
+                    <nuxt-link to="/aboutus">About</nuxt-link>
                 </b-navbar-item>
-                <b-navbar-item href="#">
-                    Contact
+                <b-navbar-item>
+                    <nuxt-link to="/contactus">Contactus</nuxt-link>
                 </b-navbar-item>
             </b-navbar-dropdown>
         </template>
 
         <template slot="end">
             <b-navbar-item tag="div">
-                <div class="buttons">
-                    <nuxt-link class="button is-dark" to="/signup">
+              
+                    <nuxt-link v-if="!$auth.loggedIn" class="button is-dark" to="/signup">
                         <strong>Sign up</strong>
                     </nuxt-link>
-                    <nuxt-link class="button is-light" to="/login">
+                    <nuxt-link v-if="!$auth.loggedIn" class="button is-light" to="/login">
                         Log in
                     </nuxt-link>
-                </div>
+                <p v-if="$auth.loggedIn">{{currentUser}}</p>
+                <button v-if="$auth.loggedIn" class="button" @click="logout">Logout</button>
+
             </b-navbar-item>
         </template>
     </b-navbar>
 </template>
 
 <script>
+import firebase from '~/config/firebaseinit'
 export default {
-    name:'navbar'
+    data(){
+        return{
+           
+        }
+    },
+    name:'navbar',
+    created(){
+        if(firebase.auth().currentUser)
+        {
+            this.loggedin = true 
+            this.currentUser = firebase.auth().currentUser.email
+        }
+    },
+    methods:{
+        logout(){
+            firebase.auth().signOut().then(()=>{
+                this.$router.push('/')
+                this.loggedin = false
+                this.currentUser = ''
+                })
+        }
+    }
 }
 </script>
 

@@ -45,6 +45,7 @@
 <script>
 import navbar from '~/components/NavBar'
 export default {
+    auth:true,
     data(){
         return{
             data:'',
